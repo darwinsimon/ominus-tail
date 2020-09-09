@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://NPC/FightTrigger.gd" type="Script" id=1]
+[ext_resource path="res://Asset/Characters/char.png" type="Texture" id=2]
+
+
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 10.6374
+height = 9.32214
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[node name="Node2D" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
+mode = 1
+script = ExtResource( 1 )
+charName = "Fight Trigger"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.629959, -2.51984 )
+frames = SubResource( 3 )
+animation = "idle"
+
+[node name="Label" type="Label" parent="."]
+margin_left = -35.1906
+margin_top = -36.0815
+margin_right = 42.8094
+margin_bottom = -22.0815
+text = "Fight Trigger"
+__meta__ = {
+"_edit_use_anchors_": false
+}
