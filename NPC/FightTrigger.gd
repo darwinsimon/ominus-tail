@@ -15,7 +15,7 @@ func can_interact(interactionComponentParent : Node) -> bool:
 	
 func interact():
 	print("Interacting")
-	print(get_tree().change_scene("res://Scenes/Battle.tscn"))
+	print(get_tree().change_scene("res://Scenes/Battle/Battle.tscn"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

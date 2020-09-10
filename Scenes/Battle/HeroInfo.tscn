@@ -4,15 +4,16 @@
 
 [node name="HeroInfo" type="VBoxContainer"]
 anchor_bottom = 1.0
-margin_right = 142.0
-margin_bottom = -994.0
+margin_top = 2.0
+margin_right = 190.0
+margin_bottom = -1035.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="."]
-margin_right = 142.0
+margin_right = 190.0
 margin_bottom = 14.0
 text = "Name Here"
 align = 2
@@ -22,13 +23,14 @@ __meta__ = {
 
 [node name="HSplit" type="HSplitContainer" parent="."]
 margin_top = 18.0
-margin_right = 142.0
+margin_right = 190.0
 margin_bottom = 32.0
 split_offset = 2
 
 [node name="HB1" type="HBoxContainer" parent="HSplit"]
-margin_right = 64.0
+margin_right = 91.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [node name="HPLabel" type="Label" parent="HSplit/HB1"]
 margin_right = 18.0
@@ -40,8 +42,9 @@ __meta__ = {
 
 [node name="CurrHP" type="Label" parent="HSplit/HB1"]
 margin_left = 22.0
-margin_right = 62.0
+margin_right = 91.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
 text = "10000"
 align = 2
 __meta__ = {
@@ -49,9 +52,10 @@ __meta__ = {
 }
 
 [node name="HB2" type="HBoxContainer" parent="HSplit"]
-margin_left = 76.0
-margin_right = 142.0
+margin_left = 103.0
+margin_right = 190.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [node name="MPLabel" type="Label" parent="HSplit/HB2"]
 margin_right = 20.0
@@ -63,8 +67,9 @@ __meta__ = {
 
 [node name="CurrMP" type="Label" parent="HSplit/HB2"]
 margin_left = 24.0
-margin_right = 56.0
+margin_right = 87.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
 text = "1000"
 align = 2
 __meta__ = {

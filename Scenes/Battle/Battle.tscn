@@ -1,55 +1,40 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scenes/Battle/Battle.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Battle/HeroInfo.tscn" type="PackedScene" id=2]
 
-[node name="Battle" type="Node2D"]
+[node name="Battle" type="Node"]
 script = ExtResource( 1 )
 
-[node name="UI" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="EnemyPanel" type="PanelContainer" parent="."]
+margin_right = 14.0
+margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HeroInfo" type="VBoxContainer" parent="UI"]
+[node name="EnemyList" type="VBoxContainer" parent="EnemyPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 7.0
+margin_bottom = 7.0
+
+[node name="SpawnCT" type="Control" parent="."]
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 169.627
-margin_top = 293.447
-margin_right = 360.627
-margin_bottom = 433.447
-alignment = 2
+margin_left = -144.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HI1" parent="UI/HeroInfo" instance=ExtResource( 2 )]
-anchor_bottom = 0.0
-margin_right = 191.0
-margin_bottom = 32.0
-hero_name = "Some thin"
+[node name="SpawnH1" type="Node2D" parent="SpawnCT"]
+position = Vector2( -48, 256 )
 
-[node name="HI2" parent="UI/HeroInfo" instance=ExtResource( 2 )]
-anchor_bottom = 0.0
-margin_top = 36.0
-margin_right = 191.0
-margin_bottom = 68.0
-hero_name = "Some thin"
+[node name="SpawnH2" type="Node2D" parent="SpawnCT"]
+position = Vector2( -48, 356 )
 
-[node name="HI3" parent="UI/HeroInfo" instance=ExtResource( 2 )]
-anchor_bottom = 0.0
-margin_top = 72.0
-margin_right = 191.0
-margin_bottom = 104.0
-hero_name = "Some thin"
+[node name="SpawnH3" type="Node2D" parent="SpawnCT"]
+position = Vector2( -48, 456 )
 
-[node name="HI4" parent="UI/HeroInfo" instance=ExtResource( 2 )]
-anchor_bottom = 0.0
-margin_top = 108.0
-margin_right = 191.0
-margin_bottom = 140.0
-hero_name = "Some thin"
+[node name="SpawnH4" type="Node2D" parent="SpawnCT"]
+position = Vector2( -48, 556 )

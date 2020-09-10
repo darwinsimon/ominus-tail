@@ -12,7 +12,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	if interact_target != null && Input.is_action_just_pressed("interact"):
+	if interact_target != null && Input.is_action_just_pressed("ui_accept"):
 		interact_target.interact()
 
 func _physics_process(delta):

@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Battle/CommandPanel.gd" type="Script" id=1]
+
+[node name="Control" type="PanelContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -133.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1913.0
+margin_bottom = 126.0
+columns = 2
+
+[node name="AttackLabel" type="Label" parent="GridContainer"]
+margin_top = 43.0
+margin_right = 951.0
+margin_bottom = 57.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Attack"
+
+[node name="DefendLabel" type="Label" parent="GridContainer"]
+margin_left = 955.0
+margin_top = 43.0
+margin_right = 1906.0
+margin_bottom = 57.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Defend"
+
+[node name="SkillLabel" type="Label" parent="GridContainer"]
+margin_top = 105.0
+margin_right = 951.0
+margin_bottom = 119.0
+text = "Skill"
+
+[node name="ItemLabel" type="Label" parent="GridContainer"]
+margin_left = 955.0
+margin_top = 105.0
+margin_right = 1906.0
+margin_bottom = 119.0
+text = "Item"
