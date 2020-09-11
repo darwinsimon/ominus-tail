@@ -5,36 +5,50 @@
 [node name="Battle" type="Node"]
 script = ExtResource( 1 )
 
-[node name="EnemyPanel" type="PanelContainer" parent="."]
-margin_right = 14.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="EnemyList" type="VBoxContainer" parent="EnemyPanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 7.0
-margin_bottom = 7.0
-
-[node name="SpawnCT" type="Control" parent="."]
+[node name="HeroSpawn" type="Control" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -144.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="SpawnH1" type="Node2D" parent="SpawnCT"]
+[node name="S0" type="Node2D" parent="HeroSpawn"]
 position = Vector2( -48, 256 )
 
-[node name="SpawnH2" type="Node2D" parent="SpawnCT"]
+[node name="S1" type="Node2D" parent="HeroSpawn"]
 position = Vector2( -48, 356 )
 
-[node name="SpawnH3" type="Node2D" parent="SpawnCT"]
+[node name="S2" type="Node2D" parent="HeroSpawn"]
 position = Vector2( -48, 456 )
 
-[node name="SpawnH4" type="Node2D" parent="SpawnCT"]
+[node name="S3" type="Node2D" parent="HeroSpawn"]
 position = Vector2( -48, 556 )
+
+[node name="EnemySpawn" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1320.0
+margin_right = -1176.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="S0" type="Node2D" parent="EnemySpawn"]
+position = Vector2( -48, 256 )
+
+[node name="S1" type="Node2D" parent="EnemySpawn"]
+position = Vector2( -48, 356 )
+
+[node name="S2" type="Node2D" parent="EnemySpawn"]
+position = Vector2( -48, 456 )
+
+[node name="S3" type="Node2D" parent="EnemySpawn"]
+position = Vector2( -48, 556 )
+
+[node name="S4" type="Node2D" parent="EnemySpawn"]
+position = Vector2( -48, 656 )

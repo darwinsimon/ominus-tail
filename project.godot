@@ -24,7 +24,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Character/Character.gd"
 }, {
-"base": "PanelContainer",
+"base": "Node",
+"class": "Command",
+"language": "GDScript",
+"path": "res://Battle/Command.gd"
+}, {
+"base": "Control",
 "class": "CommandPanel",
 "language": "GDScript",
 "path": "res://Scenes/Battle/CommandPanel.gd"
@@ -32,12 +37,17 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Character/Enemy.gd"
+"path": "res://Enemy/Enemy.gd"
 }, {
 "base": "VBoxContainer",
 "class": "EnemyInfo",
 "language": "GDScript",
 "path": "res://Scenes/Battle/EnemyInfo.gd"
+}, {
+"base": "PanelContainer",
+"class": "EnemyPanel",
+"language": "GDScript",
+"path": "res://Scenes/Battle/EnemyPanel.gd"
 }, {
 "base": "Character",
 "class": "Hero",
@@ -59,7 +69,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Item/Item.gd"
 }, {
-"base": "Control",
+"base": "VBoxContainer",
 "class": "Level1Command",
 "language": "GDScript",
 "path": "res://Scenes/Battle/Command/Level1Command.gd"
@@ -68,6 +78,11 @@ _global_script_classes=[ {
 "class": "Level1Menu",
 "language": "GDScript",
 "path": "res://Scenes/Battle/Command/Level1Menu.gd"
+}, {
+"base": "Node2D",
+"class": "Model",
+"language": "GDScript",
+"path": "res://Character/Model.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -80,26 +95,41 @@ _global_script_classes=[ {
 "path": "res://Item/Potion.gd"
 }, {
 "base": "Node",
+"class": "Selector",
+"language": "GDScript",
+"path": "res://Scenes/Battle/Selector.gd"
+}, {
+"base": "Node",
 "class": "StatusPoisoned",
 "language": "GDScript",
 "path": "res://Battle/Status/Poisoned.gd"
+}, {
+"base": "Node",
+"class": "Werewolf",
+"language": "GDScript",
+"path": "res://Enemy/Werewolf.gd"
 } ]
 _global_script_class_icons={
 "BattleScene": "",
 "BattleStatus": "",
 "Character": "",
+"Command": "",
 "CommandPanel": "",
 "Enemy": "",
 "EnemyInfo": "",
+"EnemyPanel": "",
 "Hero": "",
 "HeroInfo": "",
 "HeroPanel": "",
 "Item": "",
 "Level1Command": "",
 "Level1Menu": "",
+"Model": "",
 "Player": "",
 "Potion": "",
-"StatusPoisoned": ""
+"Selector": "",
+"StatusPoisoned": "",
+"Werewolf": ""
 }
 
 [application]
@@ -107,6 +137,10 @@ _global_script_class_icons={
 config/name="ominus-tail"
 run/main_scene="res://Scenes/World/World.tscn"
 config/icon="res://Scenes/Battle/icon.png"
+
+[autoload]
+
+Global="*res://Scenes/Global.gd"
 
 [display]
 
