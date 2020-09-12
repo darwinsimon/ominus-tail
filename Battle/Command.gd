@@ -9,7 +9,7 @@ var item : Item
 
 var targets = []
 
-func _init(type : int, source : Character, item : Item = null):
-	self.type = type
-	self.source = source
-	self.item = item
+func _init(command_type : int, command_source : Character, command_item : Item = null):
+	self.type = command_type
+	self.source = command_source
+	self.item = command_item

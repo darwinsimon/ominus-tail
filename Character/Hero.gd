@@ -11,8 +11,9 @@ func _init(
 	m_atk : int = 0,
 	m_def : int = 0,
 	speed : int = 0,
-	evasion : int = 0,
-	aim : int = 0):
+	evasion : int = 5,
+	aim : int = 100,
+	crit : int = 5):
 	self.char_name = char_name
 	
 	self.max_hp = hp
@@ -29,6 +30,7 @@ func _init(
 	self.speed = speed
 	self.evasion = evasion
 	self.aim = aim
+	self.crit = crit
 
 func _ready():
 	pass # Replace with function body.

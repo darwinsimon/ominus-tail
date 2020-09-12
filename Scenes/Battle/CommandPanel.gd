@@ -66,7 +66,7 @@ func hide():
 ### Private functions
 #######################
 
-func _set_command(cmd : Command):
+func _set_hero_command(cmd : Command):
 	commands.append(cmd)
 	curr_hero += 1
 	if curr_hero < max_hero:
@@ -83,7 +83,7 @@ func _process_selected_command(cmd : Command, cursor : int, is_enemy : bool, sel
 		for h in range(Global.heroes.size()):
 			if select_all || cursor == h:
 				cmd.targets.append(Global.heroes[h])
-	_set_command(cmd)
+	_set_hero_command(cmd)
 
 
 #######################
@@ -93,15 +93,13 @@ func _process_selected_command(cmd : Command, cursor : int, is_enemy : bool, sel
 func _on_l1_selected(selected : int):
 	match selected:
 		l1Menu.Menu.ATTACK:
-			print("Attack selected")
 			var cmd = Command.new(Command.Type.ATTACK, Global.heroes[curr_hero])
 			selector.start(cmd, true, false, true, true)
 			l1_panel.set_process_input(false)
 	match selected:
 		l1Menu.Menu.DEFEND:
-			print("Defend selected")
 			var cmd = Command.new(Command.Type.DEFEND, Global.heroes[curr_hero])
-			_set_command(cmd)
+			_set_hero_command(cmd)
 	match selected:
 		l1Menu.Menu.SKILL:
 			print("Skilling")

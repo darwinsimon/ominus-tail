@@ -30,6 +30,6 @@ func init(frames : SpriteFrames, side : int = Side.LEFT):
 	self.side = side
 	
 
-func set_selected(selected : bool) -> void:
-	self.selected = selected
-	$Container/Selector.visible = selected
+func set_selected(is_selected : bool) -> void:
+	self.selected = is_selected
+	$Container/Selector.visible = is_selected

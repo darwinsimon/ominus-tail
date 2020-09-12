@@ -19,5 +19,5 @@ func _init(num : int = 0):
 	self.m_def = 100
 	
 	self.speed = 100
-	self.evasion = 0
-	self.aim = 100
+	
+	self.commands = [Command.new(Command.Type.ATTACK, self)]

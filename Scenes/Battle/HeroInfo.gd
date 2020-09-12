@@ -1,5 +1,4 @@
 extends VBoxContainer
-
 class_name HeroInfo
 
 export(String) var hero_name = ""
@@ -28,10 +27,10 @@ func _ready():
 
 
 func set_new_hp(hp : int):
-	curr_HP = hp
+	new_HP = hp
 
 func set_new_mp(mp : int):
-	curr_MP = mp
+	new_MP = mp
 	
 func _process(delta):
 	
