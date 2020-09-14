@@ -23,6 +23,8 @@ export(int) var crit = 5
 export var buffs = []
 export var debuffs = []
 
+var model : Model
+
 func decr_hp(damage : int) -> void:
 	curr_hp = curr_hp - damage
 	if curr_hp < 0:

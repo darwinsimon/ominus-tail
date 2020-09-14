@@ -5,7 +5,8 @@ signal on_finished
 signal on_unit_selected
 signal on_unit_deselected
 
-const max_hero = 4
+const MAX_HERO : int = 4
+const DEFEND_PRIORITY : int = 10
 
 var l1SCN = preload("res://Scenes/Battle/Command/Level1Command.tscn")
 var l1Menu = preload("res://Scenes/Battle/Command/Level1Command.gd")
@@ -69,9 +70,9 @@ func hide():
 func _set_hero_command(cmd : Command):
 	commands.append(cmd)
 	curr_hero += 1
-	if curr_hero < max_hero:
+	if curr_hero < MAX_HERO:
 		l1_panel.update_hero_name(str(curr_hero))
-	elif curr_hero >= max_hero:
+	elif curr_hero >= MAX_HERO:
 		emit_signal("on_finished", commands)
 		
 func _process_selected_command(cmd : Command, cursor : int, is_enemy : bool, select_all : bool):
@@ -98,7 +99,10 @@ func _on_l1_selected(selected : int):
 			l1_panel.set_process_input(false)
 	match selected:
 		l1Menu.Menu.DEFEND:
-			var cmd = Command.new(Command.Type.DEFEND, Global.heroes[curr_hero])
+			var cmd = Command.new(Command.Type.DEFEND, 
+			Global.heroes[curr_hero],
+			null,
+			DEFEND_PRIORITY)
 			_set_hero_command(cmd)
 	match selected:
 		l1Menu.Menu.SKILL:

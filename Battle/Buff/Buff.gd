@@ -9,6 +9,7 @@ export(bool) var is_debuff = false
 export(bool) var is_hidden = false
 export(int) var dispel_turn = 0
 export(String) var description = ""
+export(bool) var is_dispelable = true
 
 var curr_turn : int = 0
 
@@ -23,13 +24,19 @@ func is_expired() -> bool:
 	
 
 # HP damage - return total damage
-func hp_damage(curr_hp : int, max_hp : int) -> int:
-	return 0
+func hp_damage(curr_hp : int, max_hp : int) -> float:
+	return 0.0
+	
+func before_attack_modifier(
+	source : Character,
+	target : Character,
+	allies : Array) -> Character:
+	return target
 	
 # Physical damage modifier - return modified damage
-func p_damage_modifier(damage : int) -> int:
+func p_damage_modifier(damage : float) -> float:
 	return damage
 	
 # Magical damage modifier - return modified damage
-func m_damage_modifier(damage : int) -> int:
+func m_damage_modifier(damage : float) -> float:
 	return damage

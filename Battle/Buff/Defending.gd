@@ -10,5 +10,5 @@ func _init():
 	is_hidden = true
 	dispel_turn = 1
 
-func p_damage_modifier(damage : int) -> int:
+func p_damage_modifier(damage : float) -> float:
 	return damage / 2

@@ -2,6 +2,7 @@ extends Node
 class_name BattleController
 
 signal on_phase_changed
+signal on_show_damage_text
 
 enum Phase {START, COMMAND, EXECUTION, END, VICTORY, DEFEAT}
 
@@ -10,9 +11,6 @@ var hInfoSCN = preload("res://Scenes/Battle/HeroInfo.tscn")
 
 var enemy_infos = []
 var hero_infos = []
-
-var enemy_models = []
-var hero_models = []
 
 var executor : Executor
 var buff_ticker : BuffTicker
@@ -40,7 +38,7 @@ func _init():
 ### Public functions
 #######################
 
-func start():
+func start() -> void:
 	_change_phase(Phase.START)
 	
 
@@ -49,7 +47,7 @@ func start():
 #######################
 
 # Changing phase
-func _change_phase(phase):
+func _change_phase(phase) -> void:
 	match phase:
 		Phase.START:
 			# TODO
@@ -70,7 +68,7 @@ func _change_phase(phase):
 			print("Defeat!")
 			
 
-func _end_phase():
+func _end_phase() -> void:
 	buff_ticker.tick_buff(Global.heroes)
 	buff_ticker.tick_buff(Global.enemies)
 	
@@ -82,12 +80,10 @@ func _end_phase():
 #######################
 
 # Execution has finished - Move to END Phase
-func _on_executor_finished():
-	print("executor finished")
+func _on_ex_finished() -> void:
 	_change_phase(Phase.END)
 
-func _on_executor_condition_changed(condition : int) -> void:
-	print("executor changed")
+func _on_ex_condition_changed(condition : int) -> void:
 	if condition == Executor.Condition.VICTORY:
 		# TODO
 		print("Victory")
@@ -97,12 +93,7 @@ func _on_executor_condition_changed(condition : int) -> void:
 
 
 # Command is set - Move to EXECUTION Phase
-func _on_command_finished(commands):
-	
-	# Add DEFENDING buff for heroes
-	for c in commands:
-		if c.type == Command.Type.DEFEND:
-			buff_ticker.add_buff(c.source, BuffDefending.new())
+func _on_command_finished(commands) -> void:
 	
 	# Set commands for enemies
 	for e in Global.enemies:
@@ -112,41 +103,57 @@ func _on_command_finished(commands):
 	_change_phase(Phase.EXECUTION)
 	
 # Set cursor for selected units
-func _on_command_unit_selected(cursor : int, is_enemy : bool, select_all : bool):
+func _on_command_unit_selected(
+		cursor : int,
+		is_enemy : bool,
+		select_all : bool) -> void:
 	if is_enemy:
-		for e in range(enemy_models.size()):
+		for e in range(Global.enemies.size()):
 			if select_all || cursor == e:
-				enemy_models[e].set_selected(true)
+				Global.enemies[e].model.set_selected(true)
 			else:
-				enemy_models[e].set_selected(false)
+				Global.enemies[e].model.set_selected(false)
 		
-		for h in range(hero_models.size()):
-			hero_models[h].set_selected(false)
+		for h in range(Global.heroes.size()):
+			Global.heroes[h].model.set_selected(false)
 	else:
-		for h in range(hero_models.size()):
+		for h in range(Global.heroes.size()):
 			if select_all || cursor == h:
-				hero_models[h].set_selected(true)
+				Global.heroes[h].model.set_selected(true)
 			else:
-				hero_models[h].set_selected(false)
-		for e in range(enemy_models.size()):
-			enemy_models[e].set_selected(false)
+				Global.heroes[h].model.set_selected(false)
+		for e in range(Global.enemies.size()):
+			Global.enemies[e].model.set_selected(false)
 
 # Remove cursors
-func _on_command_unit_deselected():
-	for e in enemy_models:
-		e.set_selected(false)
+func _on_command_unit_deselected() -> void:
+	for e in Global.enemies:
+		e.model.set_selected(false)
 
-	for h in hero_models:
-		h.set_selected(false)	
+	for h in Global.heroes:
+		h.model.set_selected(false)	
 				
-func _on_executor_damage_inflicted(damage : int, target : Character):
+func _on_ex_damage_inflicted(damage : int, target : Character) -> void:
 	if target is Enemy:
 		for e in enemy_infos:
 			if e.enemy_name == target.char_name:
-				print(e.enemy_name + " got " + str(damage) + " damage")
+				emit_signal("on_show_damage_text", str(damage), target.model.global_position)
 				break
 	else:
 		for h in hero_infos:
 			if h.hero_name == target.char_name:
 				h.set_new_hp(target.curr_hp)
+				emit_signal("on_show_damage_text", str(damage), target.model.global_position)
 				break
+
+# Target is knocked out
+func _on_ex_target_knocked_out(target : Character) -> void:
+	print("TODO")
+
+# Add new buff
+func _on_ex_new_buff(target : Character, buff : Buff) -> void:
+	buff_ticker.add_buff(target, buff)
+	
+	
+	
+	

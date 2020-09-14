@@ -35,6 +35,11 @@ _global_script_classes=[ {
 "path": "res://Battle/Buff/Defending.gd"
 }, {
 "base": "Node",
+"class": "BuffKnockedOut",
+"language": "GDScript",
+"path": "res://Battle/Buff/KnockedOut.gd"
+}, {
+"base": "Node",
 "class": "BuffPoisoned",
 "language": "GDScript",
 "path": "res://Battle/Buff/Poisoned.gd"
@@ -78,6 +83,11 @@ _global_script_classes=[ {
 "class": "Executor",
 "language": "GDScript",
 "path": "res://Scenes/Battle/Executor.gd"
+}, {
+"base": "Position2D",
+"class": "FloatingText",
+"language": "GDScript",
+"path": "res://Scenes/Battle/FloatingText/FloatingText.gd"
 }, {
 "base": "Character",
 "class": "Hero",
@@ -140,6 +150,7 @@ _global_script_class_icons={
 "Buff": "",
 "BuffConfused": "",
 "BuffDefending": "",
+"BuffKnockedOut": "",
 "BuffPoisoned": "",
 "BuffTicker": "",
 "Character": "",
@@ -149,6 +160,7 @@ _global_script_class_icons={
 "EnemyInfo": "",
 "EnemyPanel": "",
 "Executor": "",
+"FloatingText": "",
 "Hero": "",
 "HeroInfo": "",
 "HeroPanel": "",

@@ -4,6 +4,8 @@ class_name Executor
 signal on_condition_changed
 signal on_finished
 signal on_damage_inflicted
+signal on_knocked_out
+signal on_new_buff
 
 enum Condition {IN_PROGRESS, VICTORY, DEFEAT}
 
@@ -38,28 +40,30 @@ func _attack(cmd : Command):
 	
 	var target : Character = cmd.targets[0]
 	
+	# Get allies
+	var allies = []
+	if cmd.source is Enemy:
+		allies = Global.enemies
+	else:
+		allies = Global.heroes
+	
+	# Before attack modifier
 	for db in cmd.source.debuffs:
-		
-		# Check for Confused debuff - 25% hit allies
-		if db is BuffConfused && Global.rng.randi() % 4 == 0:
-			
-			# Get allies
-			var allies = []
-			if cmd.source is Enemy:
-				allies = Global.enemies
-			else:
-				allies = Global.heroes
-				
-			# Override target
-			target = allies[ Global.rng.randi() % allies.size() ]
+		target = db.before_attack_modifier(cmd.source, cmd.targets[0], allies)
+
 		
 	var damage = _calculate_damage(cmd.source, target, false)
 	target.decr_hp(damage)
 	emit_signal("on_damage_inflicted", damage, target)
+	
+	if target.curr_hp == 0:
+		emit_signal("on_target_knocked_out", target)
 
-	print(cmd.source.char_name + " attacked " + target.char_name + " for " + str(damage))
 
-func _calculate_damage(attacker : Character, target : Character, is_magical : bool = false) -> int:
+func _calculate_damage(
+	attacker : Character,
+	target : Character,
+	is_magical : bool = false) -> int:
 	
 	var attack : float = float(attacker.p_atk)
 	var defend : float = float(target.p_def)
@@ -74,6 +78,10 @@ func _calculate_damage(attacker : Character, target : Character, is_magical : bo
 	var final_damage = damage + margin
 	if final_damage <= 0:
 		final_damage = 0
+		
+	# Physical attack modifier
+	for b in target.buffs:
+		final_damage = b.p_damage_modifier(final_damage)
 	
 	return int(final_damage)
 	
@@ -87,12 +95,13 @@ func set_commands(cmd : Array) -> void:
 	commands = cmd.duplicate(true)
 	commands.sort_custom(CommandSorter, "sort")
 
+# Execute commands
 func do() -> void:
 	for cmd in commands:
 		
 		# DEFEND
 		if cmd.type == Command.Type.DEFEND:
-			print(cmd.source.char_name + " is defending")
+			emit_signal("on_new_buff", cmd.source, BuffDefending.new())
 		
 		# ATTACK
 		elif cmd.type == Command.Type.ATTACK:
@@ -114,9 +123,16 @@ func do() -> void:
 # Speed sorter
 class CommandSorter:
 	static func sort(a, b):
-		if a.source.speed > b.source.speed:
-			return true
-		elif a.source.speed == b.source.speed:
-			if a.source is Hero && b.source is Enemy:
-				return true
-		return false
+
+		# Check by priority
+		if a.priority == b.priority:
+
+			# Check by speed
+			if a.source.speed == b.source.speed:
+
+				# Hero always run first if the speed is equal
+				return a.source is Hero && b.source is Enemy
+
+			return a.source.speed > b.source.speed
+
+		return a.priority > b.priority
